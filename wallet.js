@@ -10,22 +10,22 @@ const Wallet = ethereumjs.Wallet;
 const Tx = ethereumjs.Tx;
 
 function WalletDemo() {
-    this.wltsManager = []
+    this.walletStore = []
 }
 
 WalletDemo.prototype.create = function () {
     let wlt = ethereumjs.Wallet.generate();
-    this.wltsManager.push(wlt);
+    this.walletStore.push(wlt);
 }
 
 WalletDemo.prototype.exportPrivateKey = function () {
-    this.wltsManager.forEach((wlt) => {
+    this.walletStore.forEach((wlt) => {
         console.log(wlt.getPrivateKey());
     });
 }
 
 WalletDemo.prototype.exportPrivateKeyString = function () {
-    this.wltsManager.forEach((wlt) => {
+    this.walletStore.forEach((wlt) => {
         console.log(wlt.getPrivateKeyString());
     });
 }
@@ -34,12 +34,12 @@ WalletDemo.prototype.exportPrivateKeyString = function () {
 WalletDemo.prototype.importPrivateKeyString = function (priv) {
     let pk = Buffer(priv, 'hex');
     let wlt = Wallet.fromPrivateKey(pk);
-    this.wltsManager.push(wlt);
+    this.walletStore.push(wlt);
 }
 
 //CPU intensive work, may take 10s to generate
 WalletDemo.prototype.toV3Keystore = function (password) {
-    this.wltsManager.forEach((wlt) => {
+    this.walletStore.forEach((wlt) => {
         wlt.toV3String(password);
     })
 }
@@ -49,7 +49,7 @@ WalletDemo.prototype.toV3Keystore = function (password) {
 // isStrict -what's the usage?
 WalletDemo.prototype.fromV3Keystore = function (v3string, password, isstrict) {
     let wlt = Wallet.fromV3(v3string, password, isstrict);
-    this.wltsManager.push(wlt);
+    this.walletStore.push(wlt);
 }
 
 WalletDemo.prototype.getBalance = function(address) {
@@ -89,7 +89,6 @@ WalletDemo.prototype.sendTransaction = function(toAddr, amount, gasPrice, gasLim
         }
     })
 }
-
 
 
 
