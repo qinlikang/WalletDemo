@@ -8,6 +8,7 @@ if (typeof web3 !== 'undefined') {
 const Buffer = ethereumjs.Buffer.Buffer;;
 const Wallet = ethereumjs.Wallet;
 const Tx = ethereumjs.Tx;
+const WalletHD = ethereumjs.WalletHD;
 
 function WalletDemo() {
     this.walletStore = []
@@ -90,7 +91,18 @@ WalletDemo.prototype.sendTransaction = function(toAddr, amount, gasPrice, gasLim
     })
 }
 
+function createHDWallet(seed) {
+    let buf = new Uint8Array(16);
+    let seedbuf = new Buffer(crypto.getRandomValues(buf), 'hex');
+    let root = new WalletHD.fromMasterSeed(seedbuf);
+    console.log(root.publicExtendedKey());
+    console.log(root);
+    let addr1 = root.derivePath("m/44'/60'/0/0");
+    let addr2 = root.derivePath("m/44'/60'/0/1");
 
+    console.log(addr1.privateExtendedKey());
+    console.log(addr2.privateExtendedKey());
+}
 
 let w = new WalletDemo();
 w.create();
