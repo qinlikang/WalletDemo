@@ -74,18 +74,18 @@ WalletDemo.prototype.getBalance = function(address) {
     return web3.eth.getBalance(address);
 }
 
-//ganache-cli --account="0xe4c939ce393af9751836e6d21bd8a5da28144a99936fb0a6ba769c1c1399086b,100000000000000000000" -- account="0x6cbed15c793ce57650b9877cf6fa156fbef513c4e6134f022a85b1ffdd59b2a1,100000000000000000000"
+//ganache-cli --account="0x4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d,100000000000000000000" -- account="0x6cbed15c793ce57650b9877cf6fa156fbef513c4e6134f022a85b1ffdd59b2a1,100000000000000000000"
 //we use this command to generate determinstic accounts for test purpose
 WalletDemo.prototype.sendTransaction = function(toAddr, amount, gasPrice, gasLimit) {
     let acct0 = web3.eth.accounts[0];
     let acct1 = web3.eth.accounts[1];
     let to = toAddr || acct1;
     let nonce = web3.eth.getTransactionCount(acct0);
-    let value = amount || 100000000;
-    let gp = gasPrice || '0x09184e72a000';
+    let value = amount || 10000000000;
+    let gp = gasPrice ||  100000000;
     let gl = gasLimit || 21000;
 
-    let sk = Buffer('e4c939ce393af9751836e6d21bd8a5da28144a99936fb0a6ba769c1c1399086b', 'hex');
+    let sk = Buffer('4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d', 'hex');
     let rawTx = {
         nonce: nonce,
         gasPrice: gp,
@@ -133,5 +133,3 @@ WalletDemo.toSeed = function (mnemonic, langage, passphrase) {
 }
 
 let w = new WalletDemo();
-// w.create();
-// w.create();
