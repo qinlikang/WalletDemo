@@ -13,6 +13,7 @@ const WalletHD = ethereumjs.WalletHD;
 
 function WalletDemo() {
     this.walletStore = [];
+    //standard Ethereum derive path (https://github.com/ethereum/EIPs/issues/84#issue-143651804)
     this.derivationPath = "m/44'/60'/0'/0";
 }
 
