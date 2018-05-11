@@ -116,7 +116,7 @@ WalletDemo.prototype.fromMasterSeed = function (seed, index) {
     let path = this.derivationPath + '/' + index.toString();
     console.log(path);
     let wlt1 = root.derivePath(path);
-    console.log(Util.publicToAddress(wlt1._hdkey.publicKey, true).toString('hex'));
+    console.log(Util.publicToAddress(wlt1._hdkey._publicKey, true).toString('hex'));
 }
 
 WalletDemo.prototype.fromExtendedKey = function (extkey, index) {
