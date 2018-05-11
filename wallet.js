@@ -119,6 +119,14 @@ WalletDemo.prototype.fromMasterSeed = function (seed, index) {
     console.log(Util.publicToAddress(wlt1._hdkey.publicKey, true).toString('hex'));
 }
 
+WalletDemo.prototype.fromExtendedKey = function (extkey, index) {
+    let extwlt = WalletHD.fromExtendedKey(extkey);
+    let path = '0/' + index.toString();
+
+    let child = extwlt.derivePath(path);
+    console.log(Util.publicToAddress(child._hdkey._publicKey, true).toString('hex'));
+}
+
 WalletDemo.generateMnemonic = function (language, strength) {
     let lang = language || 'english';
     let strong = strength || 128;
